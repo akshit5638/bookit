@@ -5,6 +5,7 @@ import Login from './pages/Login'
 import Layot from './Layot'
 import Register from './pages/Register'
 import axios from 'axios'
+
 const App = () => {
   axios.defaults.baseURL = 'http://localhost:4000'
   return (
