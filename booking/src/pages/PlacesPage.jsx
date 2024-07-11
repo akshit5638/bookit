@@ -2,13 +2,14 @@ import { Link, useParams } from "react-router-dom";
 import AccountNav from "../AccountNav";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import PlaceImg from "../PlaceImg"
 const PlacesPage = () => {
-    //     const [places,setPlaces] = useState([]);
-    //   useEffect(() => {
-    //     axios.get('/user-places').then(({data}) => {
-    //       setPlaces(data);
-    //     });
-    //   }, []);
+    const [places, setPlaces] = useState([]);
+    useEffect(() => {
+        axios.get('/user-places').then(({ data }) => {
+            setPlaces(data);
+        });
+    }, []);
     return (
         <div>
             <AccountNav />
@@ -21,17 +22,17 @@ const PlacesPage = () => {
                 </Link>
             </div>
             <div className="mt-4">
-                {/* {places.length > 0 && places.map(place => ( */}
-                <Link to={'/account/places/'} className="flex cursor-pointer gap-4 bg-gray-100 p-4 rounded-2xl">
-                    <div className="flex w-32 h-32 bg-gray-300 grow shrink-0">
-
-                    </div>
-                    <div className="grow-0 shrink">
-                        <h2 className="text-xl">title</h2>
-                        <p className="text-sm mt-2">description</p>
-                    </div>
-                </Link>
-                {/* ))} */}
+                {places.length > 0 && places.map(place => (
+                    <Link to={'/account/places/' + place._id} className="flex cursor-pointer gap-4 bg-gray-100 p-4 rounded-2xl">
+                        <div className="flex w-32 h-32 bg-gray-300 grow shrink-0">
+                            <PlaceImg place={place} />
+                        </div>
+                        <div className="grow-0 shrink">
+                            <h2 className="text-xl">{place.title}</h2>
+                            <p className="text-sm mt-2">{place.description}</p>
+                        </div>
+                    </Link>
+                ))}
             </div>
         </div>
     );
